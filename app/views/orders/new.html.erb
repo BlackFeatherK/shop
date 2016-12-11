@@ -1,0 +1,38 @@
+<h2>結帳</h2>
+
+<ul>
+	<% current_cart.line_items.each do |item| %>
+		<li>
+			<%= item.product.name %>
+			數量 <%= item.qty %>
+			單價 <%= item.price %>
+			總價 <%= item.price * item.qty %>
+
+			<%= link_to "[x]" , remove_product_cart_path(:product_id => item.product) , :method => :post %>
+		</li>
+	<% end %>	
+</ul>
+<p>Total amount: <%=current_cart.amount %></p>
+
+<h2>收件人</h2>
+<%= form_for @order do |f| %>
+	<div class="form-group">
+		<%= f.label :receiver_name %>
+		<%= f.text_field :receiver_name , :required => true , :class => "form-control" %>
+
+		<%= f.label :email %>
+		<%= f.text_field :email , :required => true , :class => "form-control" %>
+
+		<%= f.label :cellphone %>
+		<%= f.text_field :cellphone , :required => true , :class => "form-control" %>
+
+		<%= f.label :address %>
+		<%= f.text_field :address , :required => true , :class => "form-control" %>
+
+		<div class="form-group">
+			<%= f.submit "送出訂單" , :class => "btn btn-primary" %>
+		</div>
+	</div>
+<% end %>
+
+

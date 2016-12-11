@@ -9,10 +9,32 @@
   </head>
 
   <body>
+  
+    <div class="container">
+      <h1><%= link_to "Shop" , root_path %></h1>
 
-	<h1><%= link_to "Shop" , root_path %></h1>
+      <% if current_user %>
+        <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+        <%= link_to('修改密碼', edit_registration_path(:user)) %>
+      <% else %>
+        <%= link_to('註冊', new_registration_path(:user)) %> |
+        <%= link_to('登入', new_session_path(:user)) %>
+      <% end %>
 
-    <%= yield %>
+      <% if flash[:notice] %>
+        <div class="alert alert-success" role="alert">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
 
+      <% if flash[:alert] %>
+        <div class="alert alert-danger" role="alert">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+    	
   </body>
 </html>

@@ -1,0 +1,22 @@
+<h2>訂單記錄</h2>
+
+<table class="table">
+	<% @orders.each do |o| %>
+		<tr>
+			<td><%= o.id %></td>
+			<td><%= o.receiver_name %></td>
+			<td><%= o.amount %></td>
+			<td>
+				<% o.line_items.each do |item| %>
+					<li>
+						<%= item.product.name %>
+						數量 <%= item.qty %>
+						單價 <%= item.price %>
+						總價 <%= item.price * item.qty %>
+					</li>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+	
+</table>

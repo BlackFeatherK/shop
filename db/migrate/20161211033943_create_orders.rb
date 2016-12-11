@@ -7,7 +7,7 @@ class CreateOrders < ActiveRecord::Migration[5.0]
     	t.string :cellphone
     	t.string :address
 
-    	t.integer :amout
+    	t.integer :amount
     	
       t.timestamps
     end
