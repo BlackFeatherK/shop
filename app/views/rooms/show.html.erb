@@ -8,12 +8,7 @@
 <% end %>
 
 <ul id="messages">
-  <% @messages.each do |m| %>
-  <li>
-    <%= m.content %>
-    at <%= m.created_at.to_s %>
-  </li>
-  <% end %>
+  <%= render :partial => "messages/message" , :collection => @messages , :as => :message %>
 </ul>
 
 <script>
