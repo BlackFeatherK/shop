@@ -1,5 +1,6 @@
 <h1><%= @room.name %></h1>
 
+<h2>Ajax speak</h2>
 <%= form_for [@room, Message.new], :remote => true do |f| %>
   <p>
     <%= f.text_field :content %>
@@ -7,10 +8,21 @@
   </p>
 <% end %>
 
+<h2>WebSocket speak</h2>
+<p>
+  <input type="text" id="input-content">
+  <input type="submit" id="input-submit" value="Submit">
+</p>
+
 <ul id="messages">
-  <%= render :partial => "messages/message" , :collection => @messages , :as => :message %>
+  <%= render :partial => "messages/message", :collection => @messages, :as => :message %>
 </ul>
 
 <script>
 subscribe_room( <%= @room.id %> );
+$("#input-submit").click(function(e){
+  var content = $("#input-content").val();
+  App.messages.speak( content );
+  $("#input-content").val("");
+})
 </script>
